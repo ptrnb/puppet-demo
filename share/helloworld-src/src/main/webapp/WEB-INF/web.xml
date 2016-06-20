@@ -7,7 +7,7 @@
 
 	<servlet>
 		<servlet-name>HelloServlet</servlet-name>
-		<servlet-class>org.devops.test.HelloServlet</servlet-class>
+		<servlet-class>org.devops.example.HelloServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
