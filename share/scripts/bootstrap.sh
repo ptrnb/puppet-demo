@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PUPPETLABS_REPO = "https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm"
+PUPPETLABS_REPO="https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm"
 
 if [ "$EUID" -ne "0" ]; then
     echo "This bootstrap script must be run as root"
@@ -19,5 +19,6 @@ yum upgrade -y puppet-agent > /dev/null
 echo "Puppet installed"
 
 # Install puppet modules
-puppet module install puppetlabs/apache --target_dir /puppet/modules
-puppet module install puppetlabs/tomcat --target_dir /puppet/modules
+puppet module install puppetlabs/java --verbose --target-dir "/puppet/modules"
+puppet module install puppetlabs/apache --verbose --target-dir "/puppet/modules"
+puppet module install puppetlabs/tomcat --verbose --target-dir "/puppet/modules"
