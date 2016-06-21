@@ -1,1 +1,3 @@
-An example project using Vagrant, VirtualBox and puppet to reliably produce a VM that runs a simple WAR app in tomcat
+This was an exercise I performed a number of years ago as part of a selection test for a job. The requirement was to put together a process (ideally using puppet) to provision a new VM and deploy a simple WAR to an Apache and Tomcat stack. This code was put together over a couple of days from a standing start of no prior knowledge of VirtualBox, Vagrant or Puppet.
+
+The solution is crude but achieves the basic objective. However it could be better by doing more work to bootstrap the puppet environment, install useful puppet modules and ensure that any code changes to the WAR are correctly deployed to the Tomcat instance and activated.
