@@ -1,5 +1,21 @@
 node 'pnb.vagrant.example' {
 
+  case $operatingsystem {
+      centos, redhat: {
+          $tomcat = "tomcat"
+          $tomcat_appbase = "/var/lib/${tomcat}"
+          $conf_source = "/vagrant-share/config"
+          $httpd_conf_dir = "/etc/httpd/conf.modules.d"
+          $ajp_conf = "proxy_ajp.conf"
+          $ssl_conf = "force_ssl.conf"
+          $war = "HelloWorld.war"
+          $war_source = "/vagrant-share/helloworld-src/"
+          $war_build = "${war_source}/target/${war}"
+          $war_destination = "${tomcat_appbase}/${war}"
+          }
+      default: { fail("Unrecognised operation system for web server") }
+  }
+  
   class { 'java': 
   }
 
@@ -30,15 +46,37 @@ node 'pnb.vagrant.example' {
     service_name => 'tomcat',
   }
 
-tomcat::war { 'HelloWorld.war':
-  catalina_base => '/var/lib/tomcat',
-  war_source    => '/vagrant-share/helloworld-src/target/HelloWorld.war',
-}
+  package { 'ant':
+      ensure => present,
+  }
+
+  exec { 'build war':
+    command => 'ant war',
+    cwd     => $war_source,
+    path    => ['usr/local/bin',
+                '/usr/local/sbin',
+                '/usr/bin',
+                '/usr/sbin',
+                '/bin',
+                '/sbin'],
+    logoutput => true,
+    require   => [Package['java'],
+                  Package['ant'],
+                  Package['tomcat']],
+    unless    => "ls ${war_build}",
+  }
+
+  tomcat::war { 'HelloWorld.war':
+    catalina_base => $tomcat_appbase,
+    war_source    => $war_build,
+    require       => Exec['build war'],
+    notify        => Service['tomcat'],
+  }
 
   file { 'proxy_ajp.conf' :
-    path    => "/etc/httpd/conf.modules.d/proxy_ajp.conf",
+    path    => "${httpd_conf_dir}/${ajp_conf}",
     ensure  => present,
-    source  => "/vagrant-share/config/proxy_ajp.conf",
+    source  => "${conf_source}/${ajp_conf}",
     owner   => 'root',
     group   => 'root',
     mode    => '644',
