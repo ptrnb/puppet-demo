@@ -30,6 +30,11 @@ node 'pnb.vagrant.example' {
     service_name => 'tomcat',
   }
 
+tomcat::war { 'HelloWorld.war':
+  catalina_base => '/var/lib/tomcat',
+  war_source    => '/vagrant-share/helloworld-src/target/HelloWorld.war',
+}
+
   file { 'proxy_ajp.conf' :
     path    => "/etc/httpd/conf.modules.d/proxy_ajp.conf",
     ensure  => present,
