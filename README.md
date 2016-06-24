@@ -1,3 +1,22 @@
-This was an exercise I performed a number of years ago as part of a selection test for a job. The requirement was to put together a process (ideally using puppet) to provision a new VM and deploy a simple WAR to an Apache and Tomcat stack. This code was put together over a couple of days from a standing start of no prior knowledge of VirtualBox, Vagrant or Puppet.
+This was an exercise performed a number of years ago as part of a selection test for a job. The requirement was to put together a process (ideally using puppet) to provision a new VM and deploy a simple WAR to an Apache and Tomcat stack. This code was put together over a couple of days from a standing start of no prior knowledge of VirtualBox, Vagrant or Puppet.
 
-The solution is crude but achieves the basic objective. However it could be better by doing more work to bootstrap the puppet environment, install useful puppet modules and ensure that any code changes to the WAR are correctly deployed to the Tomcat instance and activated.
+The solution was recently re-worked to make use of various puppetlab modules.
+
+To demonstrate this example follow these steps:
+
+1. Install VirtualBox on your host
+
+2. Install vagrant on your host
+
+3. Clone this repository
+   ````
+   git clone https://github.com/ptrnb/puppet-demo.git
+   ````
+
+4. Cd to puppet-demo and run vagrant
+   ````
+   cd puppet-demo
+   vagrant up
+   ````
+
+5. Verify successful provisioning of the VM, apache and tomcat by visiting http:\\localhost:9080\HelloWorld
