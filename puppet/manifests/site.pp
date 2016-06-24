@@ -114,17 +114,5 @@ node 'pnb.vagrant.example' {
     provider => 'ip6tables',
   }
   
-  # exec { 'open port 80' :
-    # command   => 'firewall-cmd --permanent --zone=public --add-port=80/tcp && firewall-cmd --zone=public --add-port=80/tcp',
-    # cwd       => '/usr/bin',
-    # path    => ['usr/local/bin',
-                # '/usr/local/sbin',
-                # '/usr/bin',
-                # '/usr/sbin',
-                # '/bin',
-                # '/sbin'],
-    # logoutput => true,
-  # }
-
 }
 
