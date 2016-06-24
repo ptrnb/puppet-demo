@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--memory", "512"]
   end
 
-  config.vm.provision "shell", path: "share/scripts/bootstrap.sh"
+  config.vm.provision "shell", path: "share/scripts/bootstrap-centos.sh"
 
   config.vm.provision "puppet" do |puppet|
     puppet.environment = "production"

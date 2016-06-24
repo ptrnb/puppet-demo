@@ -37,7 +37,8 @@ node 'pnb.vagrant.example' {
       'tomcat', 
       'tomcat-webapps',
       'tomcat-docs-webapp',
-      'tomcat-javadoc'],
+      'tomcat-javadoc',
+      'tomcat-admin-webapps'],
   }
 
   tomcat::service { 'default':
@@ -63,7 +64,7 @@ node 'pnb.vagrant.example' {
     require   => [Package['java'],
                   Package['ant'],
                   Package['tomcat']],
-    unless    => "ls ${war_build}",
+    unless => "ls ${war_build}",
   }
 
   tomcat::war { 'HelloWorld.war':
@@ -83,4 +84,47 @@ node 'pnb.vagrant.example' {
     notify  => Service['httpd'], # Apache will restart if this file is edited
     require => Package['httpd'],
   }
+
+  class { 'firewall' :
+  }
+
+  firewall { '100 Allow inbound SSH':
+    dport     => 22,
+    proto    => tcp,
+    action   => accept,
+  }
+
+  firewall { '110 Allow inbound SSH (v6)':
+    dport     => 22,
+    proto    => tcp,
+    action   => accept,
+    provider => 'ip6tables',
+  }
+
+  firewall { '200 allow http and https access':
+    dport   => [80, 443],
+    proto  => tcp,
+    action => accept,
+  }
+
+  firewall { '210 allow http and https access (v6)':
+    dport   => [80, 443],
+    proto  => tcp,
+    action => accept,
+    provider => 'ip6tables',
+  }
+  
+  # exec { 'open port 80' :
+    # command   => 'firewall-cmd --permanent --zone=public --add-port=80/tcp && firewall-cmd --zone=public --add-port=80/tcp',
+    # cwd       => '/usr/bin',
+    # path    => ['usr/local/bin',
+                # '/usr/local/sbin',
+                # '/usr/bin',
+                # '/usr/sbin',
+                # '/bin',
+                # '/sbin'],
+    # logoutput => true,
+  # }
+
 }
+
