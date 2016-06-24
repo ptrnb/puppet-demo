@@ -19,4 +19,7 @@ To demonstrate this example follow these steps:
    vagrant up
    ````
 
-5. Verify successful provisioning of the VM, apache and tomcat by visiting http:\\localhost:9080\HelloWorld
+5. Verify successful provisioning of the VM, apache and tomcat by visiting the following address in your browser.
+   ````
+   http:\\localhost:9080\HelloWorld
+   ````
