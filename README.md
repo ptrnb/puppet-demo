@@ -9,12 +9,12 @@ To demonstrate this example follow these steps:
 2. Install vagrant on your host
 
 3. Clone this repository
-   ````
+   ````sh
    git clone https://github.com/ptrnb/puppet-demo.git
    ````
 
 4. Cd to puppet-demo and run vagrant
-   ````
+   ````sh
    cd puppet-demo
    vagrant up
    ````
@@ -23,3 +23,10 @@ To demonstrate this example follow these steps:
    ````
    http:\\localhost:9080\HelloWorld
    ````
+
+6. To clean up and remove the example VM run
+   ````sh
+   cd puppet-demo
+   vagrant destroy -f
+   ````
+
