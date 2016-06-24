@@ -21,6 +21,11 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+# Vagrant images
+.vagrant/
+
+# Downloaded puppet modules
+puppet/modules/
 
 *.gem
 *.rbc
