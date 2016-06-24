@@ -22,16 +22,16 @@ public class HelloServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		writer.println("Hello from " + System.getenv("LOGNAME"));
         writer.println("-------- Server Java System properties ---------------") ;
-		if(request.getParameter("long")!=null){
-			Enumeration enprop = theProps.propertyNames() ;
-			String key = "";
-			while ( enprop.hasMoreElements() ){
-				key = (String) enprop.nextElement() ;
-				writer.println(key+"\t"+theProps.getProperty(key)) ;
-			}
+        if(request.getParameter("long")!=null){
+            Enumeration enprop = theProps.propertyNames() ;
+            String key = "";
+            while ( enprop.hasMoreElements() ){
+                key = (String) enprop.nextElement() ;
+                writer.println(key+"\t"+theProps.getProperty(key)) ;
+            }
             writer.close();
             return;
-		}
+        }
         theProps.list(writer);  // abbreviated listing is default.
         writer.close(); 
 

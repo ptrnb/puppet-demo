@@ -24,6 +24,9 @@ buildNumber.properties
 # Vagrant images
 .vagrant/
 
+# Downloaded puppet modules
+puppet/modules/
+
 *.gem
 *.rbc
 /.config
